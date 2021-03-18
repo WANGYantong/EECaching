@@ -2,7 +2,8 @@ function para=GetPara(topo,NUM_User)
 
 [NUM_Link,NUM_AR,NUM_EC,~]=size(topo.B_laep);
 NUM_EC=NUM_EC-1;
-NUM_File=10;
+NUM_File=20;
+Pop_Ratio=1;
 
 para.alpha=2.5*1e-9*1024*1024*8; % caching factor (Watt/MB) 
 para.beta=4*1e-8*1024*1024; % transmitting factor (Joule/Mb)
@@ -16,7 +17,7 @@ para.T=10; % time period (second)
 rho_kn=zeros(NUM_User,NUM_File);
 pi_ka=zeros(NUM_User,NUM_AR);
 for ii=1:NUM_User
-    rho_kn(ii,randi([1,NUM_File]))=1;
+    rho_kn(ii,randi([1,NUM_File*Pop_Ratio]))=1;
     pi_ka(ii,randi([1,NUM_AR]))=1;
 end
 

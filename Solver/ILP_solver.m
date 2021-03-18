@@ -1,4 +1,5 @@
-function solution=ILP_solver(topo,para)
+function solution=ILP_solver(topo,para,opt)
+% opt=1 for P1; otherwise, P2
 
 [NUM_AR,NUM_EC,NUM_Path]=size(topo.N_aep);
 NUM_File=length(para.s_n);
@@ -7,9 +8,14 @@ NUM_Link=length(para.c_l);
 %% decision variables
 x=optimvar('X_ne',NUM_File,NUM_EC-1,'Type','integer',...
     'LowerBound',0,'UpperBound',1); % exclude the server
-y=optimvar('Y_naep',NUM_File,NUM_AR,NUM_EC,NUM_Path,'Type','integer',...
-    'LowerBound',0,'UpperBound',1);
 
+if opt==1
+    y=optimvar('Y_naep',NUM_File,NUM_AR,NUM_EC,NUM_Path,'Type','integer',...
+        'LowerBound',0,'UpperBound',1);
+else
+    y=optimvar('Y_naep',NUM_File,NUM_AR,NUM_EC,NUM_Path,'Type','integer',...
+        'LowerBound',0);
+end
 %% constraints
 
 sn_x=repmat(para.s_n,1,NUM_EC-1);
@@ -33,12 +39,19 @@ x_ex=cat(2,x,ones(NUM_File,1));
 x_ex=repmat(x_ex,[NUM_AR,1,1]);
 x_ex=reshape(x_ex,NUM_File,NUM_AR,NUM_EC);
 x_ex=repmat(x_ex,[1,1,1,NUM_Path]);
-constr3=y<=x_ex;
+if opt==1
+    constr3=y<=x_ex;
+else
+    constr3=y<=1e3*x_ex;
+end
 
-lambda_y=repmat(para.lambda_na,[1,1,NUM_EC,NUM_Path]);
-constr4=y<=lambda_y;
-
-constr5=para.lambda_na.*squeeze(sum(sum(y,4),3))==para.lambda_na;
+if opt==1
+    lambda_y=repmat(para.lambda_na,[1,1,NUM_EC,NUM_Path]);
+    constr4=y<=lambda_y;
+    constr5=para.lambda_na.*squeeze(sum(sum(y,4),3))==para.lambda_na;
+else
+    constr4=squeeze(sum(sum(y,4),3))==para.lambda_na;
+end
 
 %% objective function
 EC=sum(sn_x.*x,'all')*para.alpha*para.T;
@@ -56,24 +69,33 @@ ILP.Constraints.constr1=constr1;
 ILP.Constraints.constr2=constr2;
 ILP.Constraints.constr3=constr3;
 ILP.Constraints.constr4=constr4;
-ILP.Constraints.constr5=constr5;
+if opt==1
+    ILP.Constraints.constr5=constr5;
+end
 
 opts=optimoptions('intlinprog','Display','off','MaxTime',3600*2);
 
 [sol,fval,~,~]=solve(ILP,'Options',opts);
 
-ind_x=find(sol.X_ne);
-sz_x=size(sol.X_ne);
-[solution.X(:,1),solution.X(:,2)]=ind2sub(sz_x,ind_x);
-solution.X(:,3)=sol.X_ne(ind_x);
-
-ind_y=find(sol.Y_naep);
-sz_y=size(sol.Y_naep);
-[solution.Y(:,1),solution.Y(:,2),solution.Y(:,3),solution.Y(:,4)]=...
-    ind2sub(sz_y,ind_y);
-solution.Y(:,5)=sol.Y_naep(ind_y);
-
-solution.fval=fval;
+if isempty(fval)
+    solution=[];
+else
+    xx=round(sol.X_ne);
+    yy=round(sol.Y_naep);
+    
+    ind_x=find(xx);
+    sz_x=size(xx);
+    [solution.X(:,1),solution.X(:,2)]=ind2sub(sz_x,ind_x);
+    solution.X(:,3)=xx(ind_x);
+    
+    ind_y=find(yy);
+    sz_y=size(yy);
+    [solution.Y(:,1),solution.Y(:,2),solution.Y(:,3),solution.Y(:,4)]=...
+        ind2sub(sz_y,ind_y);
+    solution.Y(:,5)=yy(ind_y);
+    
+    solution.fval=fval;
+end
 
 end
 
