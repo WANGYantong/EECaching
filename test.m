@@ -3,43 +3,50 @@ clc;
 
 addpath(genpath(pwd));
 
-s=[1,1,2,2,2,3,3,4,5,4,4,5,5,6,6];
-t=[2,3,3,4,5,5,6,5,6,7,8,8,9,9,10];
-XData=[3,2,4,1,3,5,0,2,4,6];
-YData=[6,4,4,2,2,2,0,0,0,0];
-weights=ones(size(s));
-G=graph(s,t,weights);
-p=plot(G,'LineWidth',1.5,'Marker','o','MarkerSize',10,...
-    'XData',XData,'YData',YData);
 
-%% all paths collection
-source=7:10;
-target=1:10;
+topo=GetTopo(1);
 
-paths=cell(length(source),length(target));
-costs=paths;
-path_num=5;
-for ii=1:length(source)
-    for jj=1:length(target)
-        [paths{ii,jj},costs{ii,jj}]=MultiPath(G,source(ii),target(jj),path_num);
-    end
+NUM_User=100;
+
+result=zeros(1000,3);
+ratio=zeros(1000,3);
+% time=zeros(1000,3);
+%%
+para=GetPara(topo,NUM_User);
+
+% opt=1 for P1, 2 for P2
+opt=2;
+solution_ILP=ILP_solver(topo,para,opt);
+
+solution_GSAC=GSAC(topo,para,opt);
+
+
+solution_Random=Random(topo,para,opt);
+
+solution_NoCache=NoCache(topo,para,opt);
+    
+for ii=1:1000   
+    
+    Acc=0.2;
+    result_ILP=AlgArena(solution_ILP,topo,para,opt,Acc);
+    result_GSAC=AlgArena(solution_GSAC,topo,para,opt,Acc);
+    result_Random=AlgArena(solution_Random,topo,para,opt,Acc);
+    
+    % Energy Gain
+    Gain_ILP=solution_NoCache.fval/result_ILP.E;
+    Gain_GSAC=solution_NoCache.fval/result_GSAC.E;
+    Gain_Random=solution_NoCache.fval/result_Random.E;
+    
+    % Cache-Hit Ratio
+    result(ii,:)=[Gain_ILP Gain_GSAC Gain_Random];
+    ratio(ii,:)=[result_ILP.ratio result_GSAC.ratio result_Random.ratio];
+%     time(ii,:)=[solution_ILP.time solution_GSAC.time solution_Random.time];
+    
+%     fprintf('Finish Loop %d \n',ii);
+    
 end
-
-%% N_{aep} generation
-N_aep=Inf([size(costs),path_num]);
-
-for ii=1:size(costs,1)
-    for jj=1:size(costs,2)
-        if ~isempty(costs{ii,jj})
-            for kk=1:length(costs{ii,jj})
-                N_aep(ii,jj,kk)=costs{ii,jj}(kk);
-            end
-        end
-    end
-end
-
-%% B_{laep} generation
-B_laep=GetPathLinkRel(G,"undirected",paths,path_num);
-
+mean(result,1)
+mean(ratio,1)
+% mean(time,1)
 
 

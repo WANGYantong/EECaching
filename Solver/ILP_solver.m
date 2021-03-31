@@ -75,7 +75,9 @@ end
 
 opts=optimoptions('intlinprog','Display','off','MaxTime',3600*2);
 
+tic;
 [sol,fval,~,~]=solve(ILP,'Options',opts);
+solution.time=toc;
 
 if isempty(fval)
     solution=[];
