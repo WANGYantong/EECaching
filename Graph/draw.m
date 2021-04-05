@@ -84,8 +84,9 @@ end
 hold off;
 xlabel('Number of Requests');
 ylabel('Energy Gain');
-ylim([1.5,4.6]);
-set(gca,'LineWidth',box_LineWidth,'FontName','Times New Roman',...
+xlim([20,160]);
+ylim([1.5,4.8]);
+set(gca,'XTick',x,'YTick',[2,3,4],'LineWidth',box_LineWidth,...
     'FontSize',box_FontSize,'FontWeight','bold');
 lgd=legend({'Optimal','GSAC','Random'},'Orientation','horizontal',...
     'Location','north','FontSize',lgd_FontSize);
@@ -100,7 +101,7 @@ H(3).FaceColor='#666666';
 ylim([0.4,1.1]);
 xlabel('Number of Requests');
 ylabel('Cache-hit Ratio');
-set(gca,'LineWidth',box_LineWidth,'FontName','Times New Roman',...
+set(gca,'LineWidth',box_LineWidth,...
     'FontSize',box_FontSize,'FontWeight','bold');
 lgd=legend({'Optimal','GSAC','Random'},'Orientation','horizontal',...
     'Location','north','FontSize',lgd_FontSize);
@@ -116,7 +117,8 @@ end
 hold off;
 xlabel('Number of Requests');
 ylabel('Energy Gain');
-set(gca,'LineWidth',box_LineWidth,'FontName','Times New Roman',...
+xlim([20,160]);
+set(gca,'XTick',x,'LineWidth',box_LineWidth,...
     'FontSize',box_FontSize,'FontWeight','bold');
 lgd=legend({'Optimal','GSAC','Random'},'Orientation','horizontal',...
     'Location','north','FontSize',lgd_FontSize);
@@ -131,7 +133,7 @@ H(3).FaceColor='#666666';
 ylim([0.4,1.1]);
 xlabel('Number of Requests');
 ylabel('Cache-hit Ratio');
-set(gca,'LineWidth',box_LineWidth,'FontName','Times New Roman',...
+set(gca,'LineWidth',box_LineWidth,...
     'FontSize',box_FontSize,'FontWeight','bold');
 lgd=legend({'Optimal','GSAC','Random'},'Orientation','horizontal',...
     'Location','north','FontSize',lgd_FontSize);
@@ -146,8 +148,10 @@ end
 hold off;
 xlabel('Number of Requests');
 ylabel('Time (second)');
-set(gca,'YScale','log','YTick',[1e-3,1e0,1e3],'LineWidth',box_LineWidth,...
-    'FontName','Times New Roman','FontSize',box_FontSize,'FontWeight','bold');
+xlim([20,160]);
+ylim([1e-4,5e3]);
+set(gca,'XTick',x,'YScale','log','YTick',[1e-3,1e0,1e3],'LineWidth',box_LineWidth,...
+    'FontSize',box_FontSize,'FontWeight','bold');
 lgd=legend({'Optimal','GSAC','Random'},'Orientation','horizontal','Location','north',...
     'FontSize',lgd_FontSize);
 grid minor;
@@ -161,8 +165,10 @@ end
 hold off;
 xlabel('Number of Requests');
 ylabel('Time (second)');
-set(gca,'YScale','log','YTick',[1e-3,1e0,1e3],'LineWidth',box_LineWidth,...
-    'FontName','Times New Roman','FontSize',box_FontSize,'FontWeight','bold');
+xlim([20,160]);
+ylim([1e-4,5e3]);
+set(gca,'XTick',x,'YScale','log','YTick',[1e-3,1e0,1e3],'LineWidth',box_LineWidth,...
+    'FontSize',box_FontSize,'FontWeight','bold');
 lgd=legend({'Optimal','GSAC','Random'},'Orientation','horizontal','Location','north',...
     'FontSize',lgd_FontSize);
 grid minor;
@@ -195,7 +201,7 @@ clabel(C,h,v,'FontSize',lgd_FontSize,'FontWeight','bold','LabelSpacing',labelSpa
 quiver(Bandwidth,Memory,DB_Optimal,DM_Optimal,'LineWidth',curve_LineWidth);
 xlabel('Bandwidth (Gbps)');
 ylabel('Caching Memory (GB)');
-set(gca,'LineWidth',box_LineWidth,'FontName','Times New Roman',...
+set(gca,'LineWidth',box_LineWidth,...
     'FontSize',box_FontSize,'FontWeight','bold');
 grid minor;
 box on;
@@ -210,7 +216,7 @@ clabel(C,h,v,'FontSize',lgd_FontSize,'FontWeight','bold','LabelSpacing',labelSpa
 quiver(Bandwidth,Memory,DB_Huristic,DM_Huristic,'LineWidth',curve_LineWidth);
 xlabel('Bandwidth (Gbps)');
 ylabel('Caching Memory (GB)');
-set(gca,'LineWidth',box_LineWidth,'FontName','Times New Roman',...
+set(gca,'LineWidth',box_LineWidth,...
     'FontSize',box_FontSize,'FontWeight','bold');
 grid minor;
 box on;
@@ -225,7 +231,7 @@ clabel(C,h,v,'FontSize',lgd_FontSize,'FontWeight','bold','LabelSpacing',labelSpa
 quiver(Bandwidth,Memory,DB_Random,DM_Random,'LineWidth',curve_LineWidth);
 xlabel('Bandwidth (Gbps)');
 ylabel('Caching Memory (GB)');
-set(gca,'LineWidth',box_LineWidth,'FontName','Times New Roman',...
+set(gca,'LineWidth',box_LineWidth,...
     'FontSize',box_FontSize,'FontWeight','bold');
 grid minor;
 box on;
@@ -253,7 +259,7 @@ clabel(C,h,v,'FontSize',lgd_FontSize,'FontWeight','bold','LabelSpacing',labelSpa
 quiver(Bandwidth,Memory,DB_Optimal,DM_Optimal,'LineWidth',curve_LineWidth);
 xlabel('Bandwidth (Gbps)');
 ylabel('Caching Memory (GB)');
-set(gca,'LineWidth',box_LineWidth,'FontName','Times New Roman',...
+set(gca,'LineWidth',box_LineWidth,...
     'FontSize',box_FontSize,'FontWeight','bold');
 grid minor;
 box on;
@@ -268,7 +274,7 @@ clabel(C,h,v,'FontSize',lgd_FontSize,'FontWeight','bold','LabelSpacing',labelSpa
 quiver(Bandwidth,Memory,DB_Huristic,DM_Huristic,'LineWidth',curve_LineWidth);
 xlabel('Bandwidth (Gbps)');
 ylabel('Caching Memory (GB)');
-set(gca,'LineWidth',box_LineWidth,'FontName','Times New Roman',...
+set(gca,'LineWidth',box_LineWidth,...
     'FontSize',box_FontSize,'FontWeight','bold');
 grid minor;
 box on;
@@ -283,7 +289,7 @@ clabel(C,h,v,'FontSize',lgd_FontSize,'FontWeight','bold','LabelSpacing',labelSpa
 quiver(Bandwidth,Memory,DB_Random,DM_Random,'LineWidth',curve_LineWidth);
 xlabel('Bandwidth (Gbps)');
 ylabel('Caching Memory (GB)');
-set(gca,'LineWidth',box_LineWidth,'FontName','Times New Roman',...
+set(gca,'LineWidth',box_LineWidth,...
     'FontSize',box_FontSize,'FontWeight','bold');
 grid minor;
 box on;
@@ -312,7 +318,7 @@ clabel(C,h,v,'FontSize',lgd_FontSize,'FontWeight','bold','LabelSpacing',labelSpa
 quiver(Bandwidth,Memory,DB_Optimal,DM_Optimal,'LineWidth',curve_LineWidth);
 xlabel('Bandwidth (Gbps)');
 ylabel('Caching Memory (GB)');
-set(gca,'LineWidth',box_LineWidth,'FontName','Times New Roman',...
+set(gca,'LineWidth',box_LineWidth,...
     'FontSize',box_FontSize,'FontWeight','bold');
 grid minor;
 box on;
@@ -327,7 +333,7 @@ clabel(C,h,v,'FontSize',lgd_FontSize,'FontWeight','bold','LabelSpacing',labelSpa
 quiver(Bandwidth,Memory,DB_Huristic,DM_Huristic,'LineWidth',curve_LineWidth);
 xlabel('Bandwidth (Gbps)');
 ylabel('Caching Memory (GB)');
-set(gca,'LineWidth',box_LineWidth,'FontName','Times New Roman',...
+set(gca,'LineWidth',box_LineWidth,...
     'FontSize',box_FontSize,'FontWeight','bold');
 grid minor;
 box on;
@@ -342,7 +348,7 @@ clabel(C,h,v,'FontSize',lgd_FontSize,'FontWeight','bold','LabelSpacing',labelSpa
 quiver(Bandwidth,Memory,DB_Random,DM_Random,'LineWidth',curve_LineWidth);
 xlabel('Bandwidth (Gbps)');
 ylabel('Caching Memory (GB)');
-set(gca,'LineWidth',box_LineWidth,'FontName','Times New Roman',...
+set(gca,'LineWidth',box_LineWidth,...
     'FontSize',box_FontSize,'FontWeight','bold');
 grid minor;
 box on;
@@ -370,7 +376,7 @@ clabel(C,h,v,'FontSize',lgd_FontSize,'FontWeight','bold','LabelSpacing',labelSpa
 quiver(Bandwidth,Memory,DB_Optimal,DM_Optimal,'LineWidth',curve_LineWidth);
 xlabel('Bandwidth (Gbps)');
 ylabel('Caching Memory (GB)');
-set(gca,'LineWidth',box_LineWidth,'FontName','Times New Roman',...
+set(gca,'LineWidth',box_LineWidth,...
     'FontSize',box_FontSize,'FontWeight','bold');
 grid minor;
 box on;
@@ -385,7 +391,7 @@ clabel(C,h,v,'FontSize',lgd_FontSize,'FontWeight','bold','LabelSpacing',labelSpa
 quiver(Bandwidth,Memory,DB_Huristic,DM_Huristic,'LineWidth',curve_LineWidth);
 xlabel('Bandwidth (Gbps)');
 ylabel('Caching Memory (GB)');
-set(gca,'LineWidth',box_LineWidth,'FontName','Times New Roman',...
+set(gca,'LineWidth',box_LineWidth,...
     'FontSize',box_FontSize,'FontWeight','bold');
 grid minor;
 box on;
@@ -400,7 +406,7 @@ clabel(C,h,v,'FontSize',lgd_FontSize,'FontWeight','bold','LabelSpacing',labelSpa
 quiver(Bandwidth,Memory,DB_Random,DM_Random,'LineWidth',curve_LineWidth);
 xlabel('Bandwidth (Gbps)');
 ylabel('Caching Memory (GB)');
-set(gca,'LineWidth',box_LineWidth,'FontName','Times New Roman',...
+set(gca,'LineWidth',box_LineWidth,...
     'FontSize',box_FontSize,'FontWeight','bold');
 grid minor;
 box on;
@@ -408,7 +414,7 @@ axis equal;
 hold off;
 
 %% Prediction Accuracy
-acc=1:-0.1:0.2;
+acc=1:-0.1:0;
 
 EG_P1=[
 4.2364    3.9012    2.0890
@@ -419,7 +425,9 @@ EG_P1=[
 1.2412    1.2206    1.1018
 1.1009    1.0840    1.0118
 0.9921    0.9785    0.9443
-0.9026    0.8927    0.8916    
+0.9026    0.8927    0.8916
+0.7224    0.7075    0.7252
+0.6699    0.6575    0.6836
 ];
 
 CH_P1=[
@@ -431,7 +439,9 @@ CH_P1=[
 0.5200    0.5189    0.4247
 0.4513    0.4506    0.3783
 0.3886    0.3864    0.3316
-0.3223    0.3200    0.2884    
+0.3223    0.3200    0.2884 
+0.2596    0.2502    0.2459
+0.1919    0.1842    0.1876
 ];
 
 EG_P2=[
@@ -443,7 +453,9 @@ EG_P2=[
 1.8590    1.8477    1.3931
 1.6172    1.6258    1.3489
 1.4316    1.4244    1.2979
-1.2871    1.2854    1.2456    
+1.2871    1.2854    1.2456
+1.0206    1.0000    1.0371
+0.9303    0.9194    0.9643
 ];
 
 CH_P2=[
@@ -455,20 +467,22 @@ CH_P2=[
 0.5898    0.5905    0.4129
 0.5084    0.5135    0.3839
 0.4302    0.4291    0.3468
-0.3487    0.3528    0.3081    
+0.3487    0.3528    0.3081
+0.2696    0.2722    0.2559
+0.1879    0.1933    0.1887
 ];
 
 figure(19);
 hold on;
 for ii=1:3
-    plot(acc,EG_P1(9:-1:1,ii),marker(ii),'LineWidth',curve_LineWidth,'MarkerSize',curve_MarkerSize);
+    plot(acc,EG_P1(11:-1:1,ii),marker(ii),'LineWidth',curve_LineWidth,'MarkerSize',curve_MarkerSize);
 end
 hold off;
 xlabel('User Perference Prediction Accuracy');
-xticklabels({'100%','90%','80%','70%','60%','50%','40%','30%','20%'});
+xticklabels({'100%','80%','60%','40%','20%','0%'});
 ylabel('Energy Gain');
-ylim([0.8,4.5]);
-set(gca,'LineWidth',box_LineWidth,'FontName','Times New Roman',...
+ylim([0.6,4.5]);
+set(gca,'LineWidth',box_LineWidth,...
     'FontSize',box_FontSize,'FontWeight','bold');
 lgd=legend({'Optimal','GSAC','Random'},'Orientation','horizontal',...
     'Location','north','FontSize',lgd_FontSize);
@@ -476,15 +490,15 @@ grid minor;
 box on;
 
 figure(20);
-H=bar(acc,CH_P1(9:-1:1,:),'grouped');
+H=bar(acc,CH_P1(11:-1:1,:),'grouped');
 H(1).FaceColor='#bbbbbb';
 H(2).FaceColor='#999999';
 H(3).FaceColor='#666666';
-ylim([0.2,1.1]);
+ylim([0.1,1.1]);
 xlabel('User Perference Prediction Accuracy');
-xticklabels({'100%','90%','80%','70%','60%','50%','40%','30%','20%'});
+xticklabels({'100%','80%','60%','40%','20%','0%'});
 ylabel('Cache-hit Ratio');
-set(gca,'LineWidth',box_LineWidth,'FontName','Times New Roman',...
+set(gca,'LineWidth',box_LineWidth,...
     'FontSize',box_FontSize,'FontWeight','bold');
 lgd=legend({'Optimal','GSAC','Random'},'Orientation','horizontal',...
     'Location','north','FontSize',lgd_FontSize);
@@ -495,14 +509,14 @@ box on;
 figure(21);
 hold on;
 for ii=1:3
-    plot(acc,EG_P2(9:-1:1,ii),marker(ii),'LineWidth',curve_LineWidth,'MarkerSize',curve_MarkerSize);
+    plot(acc,EG_P2(11:-1:1,ii),marker(ii),'LineWidth',curve_LineWidth,'MarkerSize',curve_MarkerSize);
 end
 hold off;
 xlabel('User Perference Prediction Accuracy');
-xticklabels({'100%','90%','80%','70%','60%','50%','40%','30%','20%'});
+xticklabels({'100%','80%','60%','40%','20%','0%'});
 ylabel('Energy Gain');
-ylim([1.2,6.8]);
-set(gca,'LineWidth',box_LineWidth,'FontName','Times New Roman',...
+ylim([0.9,6.8]);
+set(gca,'LineWidth',box_LineWidth,...
     'FontSize',box_FontSize,'FontWeight','bold');
 lgd=legend({'Optimal','GSAC','Random'},'Orientation','horizontal',...
     'Location','north','FontSize',lgd_FontSize);
@@ -510,15 +524,15 @@ grid minor;
 box on;
 
 figure(22);
-H=bar(acc,CH_P2(9:-1:1,:),'grouped');
+H=bar(acc,CH_P2(11:-1:1,:),'grouped');
 H(1).FaceColor='#bbbbbb';
 H(2).FaceColor='#999999';
 H(3).FaceColor='#666666';
-ylim([0.2,1.1]);
+ylim([0.1,1.1]);
 xlabel('User Perference Prediction Accuracy');
-xticklabels({'100%','90%','80%','70%','60%','50%','40%','30%','20%'});
+xticklabels({'100%','80%','60%','40%','20%','0%'});
 ylabel('Cache-hit Ratio');
-set(gca,'LineWidth',box_LineWidth,'FontName','Times New Roman',...
+set(gca,'LineWidth',box_LineWidth,...
     'FontSize',box_FontSize,'FontWeight','bold');
 lgd=legend({'Optimal','GSAC','Random'},'Orientation','horizontal',...
     'Location','north','FontSize',lgd_FontSize);

@@ -27,7 +27,7 @@ solution_NoCache=NoCache(topo,para,opt);
     
 for ii=1:1000   
     
-    Acc=0.2;
+    Acc=0;
     result_ILP=AlgArena(solution_ILP,topo,para,opt,Acc);
     result_GSAC=AlgArena(solution_GSAC,topo,para,opt,Acc);
     result_Random=AlgArena(solution_Random,topo,para,opt,Acc);
