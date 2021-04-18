@@ -10,8 +10,8 @@ para.beta=4*1e-8*1024*1024; % transmitting factor (Joule/Mb)
 
 para.s_n=randi([1,10],NUM_File,1)*10; % content size (MB) 
 para.b_n=para.s_n; % content bandwidth (Mbps), which is corresponding to its size
-para.w_e=ones(NUM_EC,1)*1024*0.5; % caching space (MB) - 0.25GB,0.5GB,1GB
-para.c_l=ones(NUM_Link,1)*1024*0.5; % link capacity (Mbps) - 0.25Gbps,0.5Gbps,1Gbps
+para.w_e=ones(NUM_EC,1)*1024*0.5; % caching space (MB) - 0.25GB,0.5GB,0.75GB,1GB
+para.c_l=ones(NUM_Link,1)*1024*0.5; % link capacity (Mbps) - 0.25Gbps,0.5Gbps,0.75Gbps,1Gbps
 para.c_l(NUM_Link-3:NUM_Link)=1024*10;
 para.T=10; % time period (second)
 
