@@ -5,7 +5,7 @@ addpath(genpath(pwd));
 
 topo=GetTopo(1);
 
-NUM_User=100;
+NUM_User=160;
 
 Iter=100;
 % result=zeros(Iter,4);
@@ -13,9 +13,10 @@ Iter=100;
 % time=zeros(Iter,4);
 result=zeros(Iter,2);
 ratio=zeros(Iter,2);
+time=zeros(Iter,2);
 %%
 
-% for ii=1:Iter
+for ii=1:Iter
     para=GetPara(topo,NUM_User);
     
     % opt=1 for P1, 2 for P2
@@ -26,8 +27,7 @@ ratio=zeros(Iter,2);
     solution_Greedy=Greedy(topo,para,opt);
     solution_NoCache=NoCache(topo,para,opt);
 
-for ii=1:Iter
-    Acc=0;
+    Acc=1;
 %     result_ILP=AlgArena(solution_ILP,topo,para,opt,Acc);
 %     result_GSAC=AlgArena(solution_GSAC,topo,para,opt,Acc);
     result_Random=AlgArena(solution_Random,topo,para,opt,Acc);
@@ -46,12 +46,13 @@ for ii=1:Iter
     
     result(ii,:)=[Gain_Random Gain_Greedy];
     ratio(ii,:)=[result_Random.ratio result_Greedy.ratio];
-
+    time(ii,:)=[solution_Random.time solution_Greedy.time];
+    
 %     fprintf('Finish Loop %d \n',ii);
     
 end
 mean(result,1)
 mean(ratio,1)
-% mean(time,1)
+mean(time,1)
 
 
